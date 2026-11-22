@@ -2,7 +2,7 @@
    Cung cấp window.dash (loader, calc, draw, data, params) và window.claude.use('db'),
    lấy dữ liệu qua google.script.run.getAll() và ghi qua google.script.run.setDoc(). */
 (() => {
-  const BAN = '2026-11-22c';
+  const BAN = '2026-11-22d';
   const STORE = { clb_web: 'data/clb_web', mt30_web: 'data/mt30_web', tong_tuan: 'data/tong_tuan' };
   const loaders = {}, calcs = {}, draws = new Map();
   let raw = null, loi = {}, trangThai = 'loading', params = {}, cache = {}, hen = null;

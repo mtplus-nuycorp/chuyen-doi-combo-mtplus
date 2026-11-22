@@ -218,29 +218,56 @@
       td.append(b);
     };
     const add = (tr, val, cls) => { const td = tr.insertCell(); if (cls) td.className = cls; td.textContent = val === null || val === undefined ? '' : String(val); return td; };
+    /* Ô chữ/số sửa được: bấm vào để sửa, Enter hoặc bấm ra ngoài để lưu, Esc để huỷ */
+    const sua = (tr, r, f, cls, hien) => {
+      const goc = r[f] === null || r[f] === undefined ? '' : String(r[f]);
+      const td = add(tr, hien !== undefined ? hien : goc, (cls ? cls + ' ' : '') + 'mt-sua');
+      td.tabIndex = 0; td.title = 'Bấm để sửa';
+      const mo = () => {
+        if (td.querySelector('input')) return;
+        const i = document.createElement('input'); i.className = 'mt-o-sua'; i.value = goc;
+        i.style.width = Math.max(80, td.offsetWidth - 8) + 'px';
+        td.replaceChildren(i); i.focus(); i.select();
+        let xong = false;
+        const ket = (luu) => {
+          if (xong) return; xong = true;
+          const v = i.value.trim();
+          td.textContent = luu ? v : (hien !== undefined ? hien : goc);
+          if (luu && v !== goc) {
+            const so = f === 'so_thang' || f === 'diem';
+            M.luuDong(P, r, { [f]: so ? (v === '' ? null : (isNaN(parseFloat(v.replace(',', '.'))) ? v : parseFloat(v.replace(',', '.')))) : v });
+          }
+        };
+        i.onkeydown = (ev) => { if (ev.key === 'Enter') { ev.preventDefault(); ket(true); } else if (ev.key === 'Escape') ket(false); };
+        i.onblur = () => ket(true);
+      };
+      td.onclick = mo; td.onkeydown = (ev) => { if (ev.key === 'Enter') { ev.preventDefault(); mo(); } };
+      return td;
+    };
 
     dash.draw(P + '-bang-rows', (tb) => {
       const g = dash.data(P + '_bang_all'), inf = one(P + '_tuan_info');
+      if (tb.querySelector('input.mt-o-sua')) return;
       tb.replaceChildren();
       const n = P === 'clb' ? 26 : 28;
       if (g.status !== 'ok' || !inf) { oTrong(tb, n, g, 'Không đọc được bảng tick.'); return; }
       let lastGd = null; const hn = M.homNay();
       for (const r of g.data.filter((x) => x.key === inf.key)) {
         const tr = tb.insertRow();
-        add(tr, r.gd !== lastGd ? r.gd : '', 'mt-gd'); lastGd = r.gd;
-        add(tr, r.du_an, 'mt-da'); add(tr, r.tp);
+        sua(tr, r, 'gd', 'mt-gd', r.gd !== lastGd ? r.gd : ''); lastGd = r.gd;
+        sua(tr, r, 'du_an', 'mt-da'); sua(tr, r, 'tp');
         if (P === 'clb') {
-          add(tr, r.pf); add(tr, r.ngay_cd, 'n');
+          sua(tr, r, 'pf'); sua(tr, r, 'ngay_cd', 'n');
           const d = M.ngayIso(r.ngay_cd, r.key), con = d ? M.soNgay(hn, d) : null;
           const cn = add(tr, con, 'n'); if (con !== null) cn.classList.add(con < 0 ? 'cl-bad' : (con <= 14 ? 'cl-warn' : 'cl-ok'));
-          add(tr, r.so_thang, 'n');
+          sua(tr, r, 'so_thang', 'n');
           oTick(tr, r, 'mtkd24'); oTick(tr, r, 'mtkd_tuan');
           for (const k of M.CLB_TICK) oTick(tr, r, k);
           const cp = add(tr, r.pct === null || r.pct === undefined ? '' : pct(r.pct), 'n mt-big'); if (typeof r.pct === 'number') cp.classList.add('cl-' + muc(r.pct));
-          add(tr, r.diem, 'n');
+          sua(tr, r, 'diem', 'n');
         } else {
           const cp = add(tr, r.pct === null || r.pct === undefined ? '' : pct(r.pct), 'n mt-big'); if (typeof r.pct === 'number') cp.classList.add('cl-' + muc(r.pct));
-          add(tr, r.livestream); add(tr, r.thoi_gian); add(tr, r.thu_ky ? 'Có' : ''); add(tr, r.ptsp); add(tr, r.gui_bc); add(tr, r.file_tk);
+          sua(tr, r, 'livestream'); sua(tr, r, 'thoi_gian'); sua(tr, r, 'thu_ky', null, r.thu_ky ? 'Có' : ''); sua(tr, r, 'ptsp'); sua(tr, r, 'gui_bc'); sua(tr, r, 'file_tk');
           add(tr, M.dem(r, ['bld1', 'bld2', 'bld3']), 'n'); for (const k of ['bld1', 'bld2', 'bld3']) oTick(tr, r, k);
           add(tr, M.dem(r, ['khoe1', 'khoe2', 'khoe3']), 'n'); for (const k of ['khoe1', 'khoe2', 'khoe3']) oTick(tr, r, k);
           add(tr, M.dem(r, ['tc1', 'tc2', 'tc3', 'tc4']), 'n'); for (const k of ['tc1', 'tc2', 'tc3', 'tc4']) oTick(tr, r, k);

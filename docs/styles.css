@@ -110,3 +110,6 @@ html, body { margin: 0; background: var(--color-bg); color: var(--color-fg); }
 .mt-form input[aria-invalid="true"] { border-color: var(--color-bad); }
 @media (max-width: 600px) { .mt-bar { grid-template-columns: minmax(0, 8em) minmax(0, 1fr) 4em; } #dash-root { padding: 8px; } }
 @media print { .mt-tabs, .mt-btn, .mt-form, .mt-ky { display: none; } .mt-sec[hidden] { display: block !important; break-before: page; } }
+.mt-grid td.mt-sua { cursor: text; }
+.mt-grid td.mt-sua:hover, .mt-grid td.mt-sua:focus-visible { outline: 1px dashed var(--color-fg-muted); outline-offset: -2px; }
+.mt-o-sua { font: inherit; font-size: var(--cds-font-size-body); padding: 3px 5px; border: 1.5px solid var(--color-fg); border-radius: 4px; background: var(--color-bg); color: var(--color-fg); box-sizing: border-box; }
