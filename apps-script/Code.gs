@@ -126,3 +126,10 @@ function setDoc(path, data) {
   }
   return true;
 }
+
+/** Chạy thử: kiểm tra đọc được các nguồn. */
+function kiemTra() {
+  const o = JSON.parse(getAll());
+  Logger.log('Lỗi: ' + JSON.stringify(o.loi));
+  for (const id in o.sheets) Logger.log(id + ': ' + o.sheets[id].length + ' dòng');
+}
