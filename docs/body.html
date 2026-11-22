@@ -1,0 +1,265 @@
+<div class="mt">
+  <h1 class="mt-title" id="tieu-de">Chuyển đổi combo MTplus · MT30 &amp; CLB 100 tỷ</h1>
+  <div class="mt-thanh">
+    <span id="trang-thai-tai">Đang tải dữ liệu…</span>
+    <button class="mt-btn" type="button" data-tai-lai>↻ Tải lại dữ liệu</button>
+  </div>
+  <p class="mt-note">Các tuần cũ đọc từ file "Quản lý MT30 mini MT APEX 2026" và "Đo lường kỷ luật TP_MTPlus_ CLB 100 tỷ 2026". Tick và nhập ngay trên trang này; dữ liệu lưu vào file Tool quản lý. Chọn tháng để xem tổng quan, bấm vào tuần để đi vào chi tiết. Ô xanh: đạt, vàng: cần nhắc, đỏ: báo động. Trang tự tải lại mỗi 5 phút.</p>
+  <p class="mt-loi" hidden>Chưa lưu được. Kiểm tra mạng rồi thử lại; chỉ tài khoản mtplus.nuycorp@gmail.com mới tick và nhập được.</p>
+  <p class="mt-loi chi-xem" hidden>Tài khoản này chỉ xem được, không tick hay nhập được.</p>
+
+  <div class="mt-tabs" role="tablist">
+    <button class="mt-tab" role="tab" id="tab-mt30" data-tab="mt30" aria-selected="true">MT30</button>
+    <button class="mt-tab" role="tab" id="tab-clb" data-tab="clb" aria-selected="false">CLB 100 tỷ</button>
+  </div>
+
+  <!-- ===================== MT30 ===================== -->
+  <section class="mt-sec" id="mt30">
+    <div class="mt-ky" id="mt30-ky">
+      <label>Tháng <select class="dash-select" data-draw="mt30-thang" aria-label="Chọn tháng MT30"></select></label>
+      <label>Tuần <select class="dash-select" data-draw="mt30-tuan-chon" aria-label="Chọn tuần MT30"></select></label>
+      <button class="mt-btn" type="button" data-tao-tuan="mt30">+ Tạo tuần mới</button>
+    </div>
+
+    <div id="mt30-tong-thang">
+      <p class="mt-step">1 · Tổng quan tháng</p>
+      <h2 class="mt-h">Đo lường tổng <span data-draw="mt30-thang-ten">—</span></h2>
+      <div class="mt-tiles">
+        <div class="mt-card"><p class="mt-k">Số tuần đã đo</p><div class="mt-v" data-draw="mt30-th-sotuan">—</div><div class="mt-sub">Trung bình <span data-draw="mt30-th-duan">—</span> dự án mỗi tuần</div></div>
+        <div class="mt-card"><p class="mt-k">Kỷ luật trung bình tháng</p><div class="mt-v" data-draw="mt30-th-kl">—</div><div class="mt-sub">Mức đạt: từ 80%</div></div>
+        <div class="mt-card"><p class="mt-k">Lượt dự án dưới 50%</p><div class="mt-v" data-draw="mt30-th-bd">—</div><div class="mt-sub">Cộng dồn các tuần</div></div>
+        <div class="mt-card"><p class="mt-k">Tuần tốt nhất</p><div class="mt-v mt-nho" data-draw="mt30-th-tot">—</div><p class="mt-k" style="margin-top:8px">Tuần kém nhất</p><div class="mt-v mt-nho" data-draw="mt30-th-kem">—</div></div>
+      </div>
+      <p class="mt-note">Mỗi ô là kết quả hạng mục trong tuần, màu theo % đạt so với mục tiêu (rê chuột để xem). Bấm tên tuần để xem chi tiết tuần đó.</p>
+      <div class="mt-scroll"><table class="mt-table">
+        <thead><tr data-draw="mt30-thang-head"></tr></thead>
+        <tbody data-draw="mt30-thang-rows"></tbody>
+      </table></div>
+    </div>
+
+    <div id="mt30-tong-tuan" class="mt-week">
+      <p class="mt-step">2 · Đo lường tổng tuần</p>
+      <h2 class="mt-h"><span data-draw="mt30-tuan-ten">—</span></h2>
+      <p class="mt-lede" data-draw="mt30-lede">—</p>
+      <p class="mt-note">Gõ mục tiêu vào ô (vd 90% hoặc 23); để trống thì lấy mục tiêu tuần trước. Kết quả tự tính từ bảng tick bên dưới; Chuyển đổi lên combo thì nhập tay.</p>
+      <div class="mt-scroll"><table class="mt-table">
+        <thead><tr><th>Hạng mục</th><th class="n">Mục tiêu</th><th class="n">Kết quả</th><th class="n">% đạt được</th><th>Thông tin số lượng (còn thiếu)</th><th>Thông tin chất lượng, ghi chú</th></tr></thead>
+        <tbody data-draw="mt30-tong-rows"></tbody>
+      </table></div>
+      <div class="mt-grid2" style="margin-top: var(--cds-gap-md)">
+        <div class="mt-hop"><p class="mt-k">TP có tổng các hạng mục dưới 50% (cần đi nghiên cứu)</p><p data-draw="mt30-duoi50">—</p></div>
+        <div class="mt-hop"><label class="mt-k" for="mt30-nhanxet-o">Nhận xét tuần, nguyên nhân, hướng xử lý</label><textarea class="mt-nhanxet" id="mt30-nhanxet-o" data-draw="mt30-nhanxet"></textarea></div>
+      </div>
+      <div class="mt-tiles" style="margin-top: var(--cds-gap-lg)">
+        <div class="mt-card"><p class="mt-k">Kỷ luật trung bình tuần</p><div class="mt-v" data-draw="mt30-tb">—</div><div class="mt-sub"><span data-draw="mt30-so">—</span> dự án</div></div>
+        <div class="mt-card"><p class="mt-k">Dự án báo động</p><div class="mt-v" data-draw="mt30-bd">—</div><div class="mt-sub">Dưới 50% hoàn thành</div></div>
+        <div class="mt-card"><p class="mt-k">Đến hạn chuyển đổi</p><div class="mt-v" data-draw="mt30-dh">—</div><div class="mt-sub">Trong 14 ngày tới</div></div>
+        <div class="mt-card"><p class="mt-k">Lên combo năm 2026</p><div class="mt-v" data-draw="mt30-combo">—</div><div class="mt-sub"><span data-draw="mt30-combo-so">—</span> / <span data-draw="mt30-ky">—</span> dự án ký</div></div>
+      </div>
+    </div>
+
+    <div id="mt30-bang-thong-ke" class="mt-week">
+      <p class="mt-step">3 · Bảng tick chi tiết</p>
+      <h2 class="mt-h">Bảng thống kê 3.0 tuần đang chọn</h2>
+      <p class="mt-note">Bấm vào ô để tick hoặc bỏ tick, lưu ngay. Cột chữ (livestream, link thư ký…) lấy từ file gốc. ✕ ở cuối dòng để xoá dự án khỏi tuần (bấm 2 lần).</p>
+      <div class="mt-scroll"><table class="mt-table mt-grid">
+        <thead>
+          <tr class="mt-grp"><th colspan="4" class="g1">Dự án</th><th colspan="6" class="g2">Coaching CDN</th><th colspan="4" class="g3">Báo cáo BLĐ</th><th colspan="4" class="g4">Khoe CDN</th><th colspan="5" class="g5">Thu thông tin tài chính</th><th colspan="4" class="g6">MTKD và file duyệt</th><th></th></tr>
+          <tr><th>Giám đốc</th><th>Dự án</th><th>Trưởng phòng</th><th class="n">% hoàn thành</th><th>Livestream coaching</th><th>Bắt đầu – nghiệm thu</th><th>Link thư ký</th><th>Tham gia PTSP</th><th>Gửi báo cáo chapter</th><th>Chất lượng file thư ký</th><th class="n">Tổng</th><th class="c">Lần 1</th><th class="c">Lần 2</th><th class="c">Lần 3</th><th class="n">Tổng</th><th class="c">Lần 1</th><th class="c">Lần 2</th><th class="c">Lần 3</th><th class="n">Tổng</th><th class="c">3-5 khoản chi thu</th><th class="c">Chỉ số mục tiêu</th><th class="c">Dòng tiền, công nợ</th><th class="c">Doanh thu, chi phí</th><th class="c">MTKD tuần</th><th class="c">File chiến lược duyệt</th><th class="c">MTKD chốt duyệt</th><th class="c">File nghiệm thu duyệt</th><th><span class="mt-sub">Xoá</span></th></tr>
+        </thead>
+        <tbody data-draw="mt30-bang-rows"></tbody>
+        <tfoot><tr data-draw="mt30-bang-tong"></tr></tfoot>
+      </table></div>
+      <div class="mt-form">
+        <strong style="flex-basis:100%">Thêm dự án vào tuần đang chọn</strong>
+        <label>Giám đốc<input data-truong="gd" autocomplete="off"></label>
+        <label>Dự án *<input data-truong="du_an" autocomplete="off"></label>
+        <label>Trưởng phòng *<input data-truong="tp" autocomplete="off"></label>
+        <label>Bắt đầu – nghiệm thu<input data-truong="thoi_gian" placeholder="vd 3/11 - 3/12" autocomplete="off"></label>
+        <label>Livestream coaching<input data-truong="livestream" autocomplete="off"></label>
+        <button class="mt-btn chinh" type="button" data-them="mt30">Thêm dự án</button>
+      </div>
+    </div>
+
+    <div class="mt-grid2 mt-week">
+      <div id="mt30-thieu">
+        <p class="mt-step">4 · Thiếu gì</p>
+        <h2 class="mt-h">Số dự án còn thiếu từng hạng mục</h2>
+        <div class="mt-bars" data-draw="mt30-thieu"></div>
+      </div>
+      <div id="mt30-gd">
+        <p class="mt-step">5 · Ai phụ trách</p>
+        <h2 class="mt-h">Theo giám đốc</h2>
+        <div class="mt-scroll"><table class="mt-table">
+          <thead><tr><th>Giám đốc</th><th class="n">Dự án</th><th class="n">Kỷ luật TB</th><th class="n">Báo động</th><th class="n">Đến hạn</th></tr></thead>
+          <tbody data-draw="mt30-gd"></tbody>
+        </table></div>
+      </div>
+    </div>
+
+    <div id="mt30-chitiet" class="mt-week">
+      <p class="mt-step">6 · Cần nhắc</p>
+      <h2 class="mt-h">Từng dự án và hạng mục còn thiếu</h2>
+      <div class="mt-scroll"><table class="mt-table">
+        <thead><tr><th>Dự án</th><th>GĐ</th><th>TP/TN</th><th>Vai trò</th><th class="n">% hoàn thành</th><th class="n">Mốc chuyển đổi</th><th class="n">Còn (ngày)</th><th>Tình trạng</th><th>Hạng mục thiếu</th></tr></thead>
+        <tbody data-draw="mt30-rows"></tbody>
+      </table></div>
+    </div>
+
+    <div id="mt30-zalo" class="mt-week">
+      <p class="mt-step">7 · Báo cáo hằng ngày</p>
+      <h2 class="mt-h">Báo cáo qua Zalo tuần này</h2>
+      <p class="mt-note">Đếm các tin TP/TN gửi trong nhóm MT30 MT APEX theo cú pháp Mã TP_hạng mục. Claude cập nhật mỗi tối.</p>
+      <p class="mt-note" data-draw="mt30-zalo-sum">—</p>
+      <div class="mt-scroll"><table class="mt-table">
+        <thead><tr><th>TP/TN</th><th class="n">Khoe CDN</th><th class="n">Báo cáo BLĐ</th><th class="n">TTTC</th><th class="n">MTKD</th><th class="n">Livestream</th><th class="n">PTSP</th><th class="n">Coaching</th><th class="n">Khác</th><th class="n">Tổng</th><th>Lần gửi gần nhất</th></tr></thead>
+        <tbody data-draw="mt30-zalo-rows"></tbody>
+      </table></div>
+    </div>
+
+    <div id="mt30-cac-tuan" class="mt-week">
+      <p class="mt-step">8 · Lịch sử</p>
+      <h2 class="mt-h">Kỷ luật các tuần từ tháng 4/2026</h2>
+      <p class="mt-note">Chấm đỏ là tuần dưới 50%. Bấm vào một chấm hoặc chọn tuần để xem từng dự án.</p>
+      <div class="mt-fig" id="mt30-xu-huong" data-draw="mt30-trend"></div>
+      <div class="mt-row"><label for="mt30-chon-tuan">Tuần</label><select class="dash-select" id="mt30-chon-tuan" data-draw="mt30-week"></select></div>
+      <p class="mt-note" data-draw="mt30-week-sum">—</p>
+      <div class="mt-scroll"><table class="mt-table">
+        <thead><tr><th>Dự án</th><th>GĐ</th><th>TP/TN</th><th class="n">% hoàn thành</th><th class="n">Báo cáo BLĐ</th><th class="n">Khoe CDN</th><th class="n">TTTC</th></tr></thead>
+        <tbody data-draw="mt30-week-rows"></tbody>
+      </table></div>
+    </div>
+
+    <div id="mt30-tin" class="mt-week">
+      <p class="mt-step">9 · Truyền thông</p>
+      <h2 class="mt-h">Tin nhắn gửi nhóm Zalo MT30</h2>
+      <div class="mt-row"><button class="mt-btn" type="button" data-copy="mt30-msg">Copy tin nhắn</button><span class="mt-note" data-draw="mt30-copied"></span></div>
+      <pre class="mt-msg" data-draw="mt30-msg">—</pre>
+    </div>
+  </section>
+
+  <!-- ===================== CLB 100 tỷ ===================== -->
+  <section class="mt-sec" id="clb" hidden>
+    <div class="mt-ky" id="clb-ky">
+      <label>Tháng <select class="dash-select" data-draw="clb-thang" aria-label="Chọn tháng CLB"></select></label>
+      <label>Tuần <select class="dash-select" data-draw="clb-tuan-chon" aria-label="Chọn tuần CLB"></select></label>
+      <button class="mt-btn" type="button" data-tao-tuan="clb">+ Tạo tuần mới</button>
+    </div>
+
+    <div id="clb-tong-thang">
+      <p class="mt-step">1 · Tổng quan tháng</p>
+      <h2 class="mt-h">Đo lường tổng <span data-draw="clb-thang-ten">—</span></h2>
+      <div class="mt-tiles">
+        <div class="mt-card"><p class="mt-k">Số tháng chuyển đổi combo (file tháng)</p><div class="mt-v"><span data-draw="clb-kq">—</span> / <span data-draw="clb-mt">—</span></div><div class="mt-sub"><span data-draw="clb-pct">—</span> mục tiêu, cần thêm <span data-draw="clb-thieu">—</span></div></div>
+        <div class="mt-card"><p class="mt-k">Số tuần đã đo</p><div class="mt-v" data-draw="clb-th-sotuan">—</div><div class="mt-sub">Trung bình <span data-draw="clb-th-duan">—</span> dự án mỗi tuần</div></div>
+        <div class="mt-card"><p class="mt-k">Kỷ luật trung bình tháng</p><div class="mt-v" data-draw="clb-th-kl">—</div><div class="mt-sub">Mức đạt: từ 80%</div></div>
+        <div class="mt-card"><p class="mt-k">Lượt dự án dưới 50%</p><div class="mt-v" data-draw="clb-th-bd">—</div><div class="mt-sub">Cộng dồn các tuần</div></div>
+        <div class="mt-card"><p class="mt-k">Tuần tốt nhất</p><div class="mt-v mt-nho" data-draw="clb-th-tot">—</div><p class="mt-k" style="margin-top:8px">Tuần kém nhất</p><div class="mt-v mt-nho" data-draw="clb-th-kem">—</div></div>
+      </div>
+      <p class="mt-note">Mỗi ô là kết quả hạng mục trong tuần, màu theo % đạt so với mục tiêu (rê chuột để xem). Bấm tên tuần để xem chi tiết tuần đó.</p>
+      <div class="mt-scroll"><table class="mt-table">
+        <thead><tr data-draw="clb-thang-head"></tr></thead>
+        <tbody data-draw="clb-thang-rows"></tbody>
+      </table></div>
+    </div>
+
+    <div id="clb-tong-tuan" class="mt-week">
+      <p class="mt-step">2 · Đo lường tổng tuần</p>
+      <h2 class="mt-h"><span data-draw="clb-tuan-ten">—</span></h2>
+      <p class="mt-lede" data-draw="clb-lede">—</p>
+      <p class="mt-note">Gõ mục tiêu vào ô (vd 90% hoặc 23); để trống thì lấy mục tiêu tuần trước. Kết quả tự tính từ bảng tick bên dưới; Doanh số, Số tháng CĐ combo và Tỷ lệ phối hợp thì nhập tay.</p>
+      <div class="mt-scroll"><table class="mt-table">
+        <thead><tr><th>Hạng mục</th><th class="n">Mục tiêu</th><th class="n">Kết quả</th><th class="n">% đạt được</th><th>Thông tin số lượng (còn thiếu)</th><th>Thông tin chất lượng, ghi chú</th></tr></thead>
+        <tbody data-draw="clb-tong-rows"></tbody>
+      </table></div>
+      <div class="mt-grid2" style="margin-top: var(--cds-gap-md)">
+        <div class="mt-hop"><p class="mt-k">TP có tổng các hạng mục dưới 50% (cần đi nghiên cứu)</p><p data-draw="clb-duoi50">—</p></div>
+        <div class="mt-hop"><label class="mt-k" for="clb-nhanxet-o">Nhận xét tuần, nguyên nhân, hướng xử lý</label><textarea class="mt-nhanxet" id="clb-nhanxet-o" data-draw="clb-nhanxet"></textarea></div>
+      </div>
+      <div class="mt-tiles" style="margin-top: var(--cds-gap-lg)">
+        <div class="mt-card"><p class="mt-k">Kỷ luật trung bình tuần</p><div class="mt-v" data-draw="clb-tb">—</div><div class="mt-sub"><span data-draw="clb-so">—</span> dự án</div></div>
+        <div class="mt-card"><p class="mt-k">Dự án báo động</p><div class="mt-v" data-draw="clb-bd">—</div><div class="mt-sub">Dưới 50% hoàn thành</div></div>
+        <div class="mt-card"><p class="mt-k">Đến hạn chuyển đổi</p><div class="mt-v" data-draw="clb-dh">—</div><div class="mt-sub"><span data-draw="clb-cn">—</span> dự án cần cập nhật ngày</div></div>
+      </div>
+    </div>
+
+    <div id="clb-bang-ky-luat" class="mt-week">
+      <p class="mt-step">3 · Bảng tick chi tiết</p>
+      <h2 class="mt-h">Bảng kỷ luật tuần đang chọn</h2>
+      <p class="mt-note">Bấm vào ô để tick hoặc bỏ tick, lưu ngay; % hoàn thành tự tính lại. Còn (ngày) tính từ ngày chuyển đổi đến hôm nay. ✕ ở cuối dòng để xoá dự án khỏi tuần (bấm 2 lần).</p>
+      <div class="mt-scroll"><table class="mt-table mt-grid">
+        <thead>
+          <tr class="mt-grp"><th colspan="7" class="g1">Thông tin dự án</th><th colspan="2" class="g6">MTKD</th><th class="g2">Coaching</th><th colspan="2" class="g2">File thư ký</th><th colspan="2" class="g2">PTSP chapter</th><th colspan="3" class="g3">Báo cáo BLĐ</th><th colspan="2" class="g4">Khoe CDN</th><th colspan="4" class="g5">Thu thông tin tài chính</th><th colspan="2" class="g6">Kết quả</th><th></th></tr>
+          <tr><th>Giám đốc</th><th>Dự án</th><th>TP</th><th>Part/Full</th><th class="n">Ngày chuyển đổi</th><th class="n">Còn (ngày)</th><th class="n">Số tháng</th><th class="c">MTKD 24 tháng</th><th class="c">MTKD tuần</th><th class="c">Có coaching</th><th class="c">Có thư ký</th><th class="c">Đẩy Marte</th><th class="c">Tham gia</th><th class="c">Gửi dữ liệu</th><th class="c">Lần 1</th><th class="c">Lần 2</th><th class="c">Lần 3</th><th class="c">Lần 1</th><th class="c">Lần 2</th><th class="c">3-5 khoản chi</th><th class="c">Chỉ số mục tiêu</th><th class="c">Dòng tiền</th><th class="c">Doanh thu, chi phí</th><th class="n">% hoàn thành</th><th class="n">Điểm thăng tiến</th><th><span class="mt-sub">Xoá</span></th></tr>
+        </thead>
+        <tbody data-draw="clb-bang-rows"></tbody>
+        <tfoot><tr data-draw="clb-bang-tong"></tr></tfoot>
+      </table></div>
+      <div class="mt-form">
+        <strong style="flex-basis:100%">Thêm dự án vào tuần đang chọn</strong>
+        <label>Giám đốc<input data-truong="gd" autocomplete="off"></label>
+        <label>Dự án *<input data-truong="du_an" autocomplete="off"></label>
+        <label>Trưởng phòng *<input data-truong="tp" autocomplete="off"></label>
+        <label>Part/Full<input data-truong="pf" autocomplete="off"></label>
+        <label>Ngày chuyển đổi<input data-truong="ngay_cd" placeholder="vd 15/12/2026" autocomplete="off"></label>
+        <button class="mt-btn chinh" type="button" data-them="clb">Thêm dự án</button>
+      </div>
+    </div>
+
+    <div class="mt-grid2 mt-week">
+      <div id="clb-thieu">
+        <p class="mt-step">4 · Thiếu gì</p>
+        <h2 class="mt-h">Số dự án còn thiếu từng hạng mục</h2>
+        <div class="mt-bars" data-draw="clb-thieu-bars"></div>
+      </div>
+      <div id="clb-gd">
+        <p class="mt-step">5 · Ai phụ trách</p>
+        <h2 class="mt-h">Theo giám đốc</h2>
+        <div class="mt-scroll"><table class="mt-table">
+          <thead><tr><th>Giám đốc</th><th class="n">Dự án</th><th class="n">Kỷ luật TB</th><th class="n">Điểm thăng tiến TB</th><th class="n">Báo động</th></tr></thead>
+          <tbody data-draw="clb-gd"></tbody>
+        </table></div>
+      </div>
+    </div>
+
+    <div id="clb-chitiet" class="mt-week">
+      <p class="mt-step">6 · Cần nhắc</p>
+      <h2 class="mt-h">Từng dự án và hạng mục còn thiếu</h2>
+      <div class="mt-scroll"><table class="mt-table">
+        <thead><tr><th>Dự án</th><th>GĐ</th><th>TP/TN</th><th>Vai trò</th><th class="n">% hoàn thành</th><th class="n">Điểm</th><th class="n">Ngày chuyển đổi</th><th class="n">Còn (ngày)</th><th>Tình trạng</th><th>Hạng mục thiếu</th></tr></thead>
+        <tbody data-draw="clb-rows"></tbody>
+      </table></div>
+    </div>
+
+    <div id="clb-zalo" class="mt-week">
+      <p class="mt-step">7 · Báo cáo hằng ngày</p>
+      <h2 class="mt-h">Báo cáo qua Zalo tuần này</h2>
+      <p class="mt-note">Đếm các tin TP gửi trong nhóm TP BÁO CÁO TIẾN ĐỘ CLB 100 TỶ theo cú pháp Mã TP_hạng mục. Claude cập nhật mỗi tối.</p>
+      <p class="mt-note" data-draw="zalo-sum">—</p>
+      <div class="mt-scroll"><table class="mt-table">
+        <thead><tr><th>TP/TN</th><th class="n">Khoe CDN</th><th class="n">Báo cáo BLĐ</th><th class="n">TTTC</th><th class="n">MTKD</th><th class="n">Coaching</th><th class="n">Khác</th><th class="n">Tổng</th><th>Lần gửi gần nhất</th></tr></thead>
+        <tbody data-draw="zalo-rows"></tbody>
+      </table></div>
+    </div>
+
+    <div id="clb-cac-tuan" class="mt-week">
+      <p class="mt-step">8 · Lịch sử</p>
+      <h2 class="mt-h">Kỷ luật các tuần từ tháng 3/2026</h2>
+      <p class="mt-note">Chấm đỏ là tuần dưới 50%. Bấm vào một chấm hoặc chọn tuần để xem từng dự án.</p>
+      <div class="mt-fig" id="clb-xu-huong" data-draw="clb-trend"></div>
+      <div class="mt-row"><label for="clb-chon-tuan">Tuần</label><select class="dash-select" id="clb-chon-tuan" data-draw="clb-week"></select></div>
+      <p class="mt-note" data-draw="clb-week-sum">—</p>
+      <div class="mt-scroll"><table class="mt-table">
+        <thead><tr><th>Dự án</th><th>GĐ</th><th>TP/TN</th><th class="n">% hoàn thành</th><th class="n">Điểm thăng tiến</th></tr></thead>
+        <tbody data-draw="clb-week-rows"></tbody>
+      </table></div>
+    </div>
+
+    <div id="clb-tin" class="mt-week">
+      <p class="mt-step">9 · Truyền thông</p>
+      <h2 class="mt-h">Tin nhắn gửi nhóm Zalo CLB 100 tỷ</h2>
+      <div class="mt-row"><button class="mt-btn" type="button" data-copy="clb-msg">Copy tin nhắn</button><span class="mt-note" data-draw="clb-copied"></span></div>
+      <pre class="mt-msg" data-draw="clb-msg">—</pre>
+    </div>
+  </section>
+</div>
