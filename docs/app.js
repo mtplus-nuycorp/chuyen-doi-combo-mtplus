@@ -2,7 +2,7 @@
    Cung cấp window.dash (loader, calc, draw, data, params) và window.claude.use('db'),
    lấy dữ liệu qua google.script.run.getAll() và ghi qua google.script.run.setDoc(). */
 (() => {
-  const BAN = '2026-11-22b';
+  const BAN = '2026-11-22c';
   const STORE = { clb_web: 'data/clb_web', mt30_web: 'data/mt30_web', tong_tuan: 'data/tong_tuan' };
   const loaders = {}, calcs = {}, draws = new Map();
   let raw = null, loi = {}, trangThai = 'loading', params = {}, cache = {}, hen = null;
@@ -42,7 +42,18 @@
       try { fn(el); } catch (e) { console.error('draw ' + name, e); }
     }
   }
-  function veTat() { hen = null; cache = {}; for (const [name, fn] of draws) veMot(name, fn); }
+  function veTat() {
+    hen = null; cache = {};
+    // giữ nguyên vị trí cuộn khi vẽ lại (bảng thay nội dung không được làm trang nhảy)
+    const se = document.scrollingElement || document.documentElement;
+    const y = se.scrollTop, ngang = [...document.querySelectorAll('.mt-scroll')].map((e) => e.scrollLeft);
+    const cao = document.getElementById('dash-root');
+    if (cao) cao.style.minHeight = cao.offsetHeight + 'px';
+    for (const [name, fn] of draws) veMot(name, fn);
+    document.querySelectorAll('.mt-scroll').forEach((e, i) => { if (ngang[i] !== undefined) e.scrollLeft = ngang[i]; });
+    se.scrollTop = y;
+    if (cao) requestAnimationFrame(() => { cao.style.minHeight = ''; });
+  }
   function lenLich() { if (!hen) hen = requestAnimationFrame(veTat); }
 
   window.dash = {
