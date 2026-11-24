@@ -133,3 +133,66 @@ function kiemTra() {
   Logger.log('Lỗi: ' + JSON.stringify(o.loi));
   for (const id in o.sheets) Logger.log(id + ': ' + o.sheets[id].length + ' dòng');
 }
+
+/* ===================== ZALO BOT =====================
+ * Token của bot KHÔNG để trong code: lưu ở Project Settings → Script Properties, tên ZALO_TOKEN.
+ * Các nhóm bot nhìn thấy được lưu ở Script Properties ZALO_CHATS (tự ghi khi chạy zaloTimNhom).
+ */
+const ZALO_API = 'https://bot-api.zaloplatforms.com/bot';
+
+function zalo_(method, payload) {
+  const tk = PropertiesService.getScriptProperties().getProperty('ZALO_TOKEN');
+  if (!tk) throw new Error('Chưa có ZALO_TOKEN trong Script Properties (Project Settings).');
+  const r = UrlFetchApp.fetch(ZALO_API + tk.trim() + '/' + method, {
+    method: 'post', contentType: 'application/json',
+    payload: JSON.stringify(payload || {}), muteHttpExceptions: true
+  });
+  const t = r.getContentText();
+  let j;
+  try { j = JSON.parse(t); } catch (e) { throw new Error('Zalo trả về (' + r.getResponseCode() + '): ' + t.slice(0, 300)); }
+  if (j.ok === false) throw new Error('Zalo báo lỗi: ' + t.slice(0, 300));
+  return j;
+}
+
+/** Bước 1: kiểm tra token đúng chưa (xem tên bot trong Nhật ký thực thi). */
+function zaloKiemTraBot() {
+  Logger.log(JSON.stringify(zalo_('getMe')));
+}
+
+/** Bước 2: sau khi đã @tên bot trong từng nhóm, chạy hàm này để lấy mã nhóm. */
+function zaloTimNhom() {
+  const j = zalo_('getUpdates', { timeout: 0 });
+  Logger.log('Thô: ' + JSON.stringify(j).slice(0, 1500));
+  let ds = j.result;
+  if (!Array.isArray(ds)) ds = ds ? [ds] : [];
+  const p = PropertiesService.getScriptProperties();
+  const chats = JSON.parse(p.getProperty('ZALO_CHATS') || '{}');
+  for (const u of ds) {
+    const m = u.message || (u.result && u.result.message) || u;
+    const c = m && m.chat;
+    if (!c || !c.id) continue;
+    const f = m.from || {};
+    chats[c.id] = {
+      loai: c.chat_type || c.type || '',
+      ten: c.display_name || c.title || c.name || '',
+      nguoi_gui: f.display_name || f.name || '',
+      tin: String(m.text || '').slice(0, 80),
+      luc: new Date().toISOString()
+    };
+  }
+  p.setProperty('ZALO_CHATS', JSON.stringify(chats));
+  Logger.log('Các cuộc chat bot thấy: ' + JSON.stringify(chats, null, 1));
+}
+
+function zaloGui_(chatId, text) {
+  // Zalo giới hạn khoảng 2.000 ký tự mỗi tin: tự cắt thành nhiều tin theo dòng.
+  const phan = [];
+  let cur = '';
+  for (const dong of String(text).split('\n')) {
+    if ((cur + '\n' + dong).length > 1900 && cur) { phan.push(cur); cur = dong; }
+    else cur = cur ? cur + '\n' + dong : dong;
+  }
+  if (cur) phan.push(cur);
+  for (const t of phan) { zalo_('sendMessage', { chat_id: String(chatId), text: t }); Utilities.sleep(800); }
+  return phan.length;
+}
