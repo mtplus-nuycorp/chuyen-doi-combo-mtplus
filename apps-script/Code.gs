@@ -23,7 +23,10 @@ const NGUON = {
   danhba: [TOOL_ID, 'Danh bạ TP/TN', 'A1:C60'],
   mt30_lichsu: [TOOL_ID, 'Lịch sử MT30', 'A1:I1500'],
   clb_lichsu: [TOOL_ID, 'Lịch sử CLB 100 tỷ', 'A1:G2000'],
-  zalo_log: [TOOL_ID, 'Báo cáo Zalo', 'A1:H3000']
+  zalo_log: [TOOL_ID, 'Báo cáo Zalo', 'A1:H3000'],
+  quy_luat: [TOOL_ID, 'Luật thưởng phạt', 'A1:I40'],
+  quy_md: [TOOL_ID, 'Mã định danh & Quỹ cọc', 'A1:H300'],
+  quy_coc: [TOOL_ID, 'Đối soát cọc', 'A1:K3000']
 };
 
 // Dữ liệu nhập trên web: đường dẫn -> tab trong file Tool

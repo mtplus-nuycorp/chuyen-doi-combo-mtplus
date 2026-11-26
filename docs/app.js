@@ -2,7 +2,7 @@
    Cung cấp window.dash (loader, calc, draw, data, params) và window.claude.use('db'),
    lấy dữ liệu qua google.script.run.getAll() và ghi qua google.script.run.setDoc(). */
 (() => {
-  const BAN = '2026-11-22d';
+  const BAN = '2026-11-26a';
   const STORE = { clb_web: 'data/clb_web', mt30_web: 'data/mt30_web', tong_tuan: 'data/tong_tuan' };
   const loaders = {}, calcs = {}, draws = new Map();
   let raw = null, loi = {}, trangThai = 'loading', params = {}, cache = {}, hen = null;
@@ -127,7 +127,7 @@
     try {
       const html = await (await fetch(goc + 'body.html?v=' + BAN)).text();
       document.getElementById('dash-root').innerHTML = html;
-      for (const f of ['lib.js', 'calcs.js', 'draw.js']) await napScript(goc + f + '?v=' + BAN);
+      for (const f of ['lib.js', 'calcs.js', 'draw.js', 'quy.js']) await napScript(goc + f + '?v=' + BAN);
     } catch (e) {
       document.getElementById('dash-root').textContent = 'Không tải được giao diện: ' + e.message;
       return;
