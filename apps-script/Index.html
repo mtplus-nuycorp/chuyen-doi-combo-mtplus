@@ -3,12 +3,12 @@
 <head>
   <base target="_top">
   <meta charset="utf-8">
-  <link rel="stylesheet" href="<?= asset ?>styles.css">
+  <link rel="stylesheet" href="<?= asset ?>styles.css?t=<?= new Date().getTime() ?>">
 </head>
 <body>
   <div id="dash-root"><p style="font-family:sans-serif;padding:24px">Đang tải dashboard…</p></div>
   <script>window.ASSET = '<?= asset ?>';</script>
   <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
-  <script src="<?= asset ?>app.js"></script>
+  <script src="<?= asset ?>app.js?t=<?= new Date().getTime() ?>"></script>
 </body>
 </html>
