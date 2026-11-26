@@ -117,6 +117,7 @@
     }
   });
 
+  const daHetTuan = (key) => M.soNgay(key, M.homNay()) >= 7;
   const tuanChon = (ds) => { const p = dash.params().quy_tuan; return ds.some((d) => d.key === p) ? p : (ds.length ? ds[ds.length - 1].key : null); };
 
   dash.calc('quy_so_du', {
@@ -127,7 +128,9 @@
         const k = khoa(d.ma);
         const nop = coc.filter((c) => c.ct === d.ct && khoa(c.ma) === k).reduce((s, c) => s + c.tien, 0);
         const cua = ct.filter((x) => x.prog === d.ct && x.ma_dd === d.ma && !x.luong_gd);
-        const thuong = d3.sum(cua, (x) => x.thuong), phat = d3.sum(cua, (x) => x.phat);
+        // chỉ trừ/cộng vào số dư khi tuần đã kết thúc (sau Chủ nhật); tuần đang chạy chỉ là tạm tính
+        const chot = cua.filter((x) => daHetTuan(x.key));
+        const thuong = d3.sum(chot, (x) => x.thuong), phat = d3.sum(chot, (x) => x.phat);
         const tuan = cua.filter((x) => x.key === key);
         const so_du = nop + thuong - phat;
         const trang_thai = !nop ? 'Chưa nộp cọc' : (so_du < d.coc * 0.5 ? 'Cần nộp bù' : (nop < d.coc ? 'Nộp thiếu' : 'Đủ'));
@@ -141,7 +144,7 @@
     fn: (sd, ct, tuans) => {
       const key = tuanChon(tuans);
       const t = ct.filter((x) => x.key === key);
-      return [{ nop: d3.sum(sd, (x) => x.nop), so_du: d3.sum(sd, (x) => x.so_du), thuong: d3.sum(t.filter((x) => !x.luong_gd), (x) => x.thuong), phat: d3.sum(t.filter((x) => !x.luong_gd), (x) => x.phat),
+      return [{ tam_tinh: key ? !daHetTuan(key) : false, nop: d3.sum(sd, (x) => x.nop), so_du: d3.sum(sd, (x) => x.so_du), thuong: d3.sum(t.filter((x) => !x.luong_gd), (x) => x.thuong), phat: d3.sum(t.filter((x) => !x.luong_gd), (x) => x.phat),
         luong_gd: d3.sum(t.filter((x) => x.luong_gd), (x) => x.phat), can_bu: sd.filter((x) => x.trang_thai !== 'Đủ').length, tong: sd.length, chua_khop: Array.from(new Set(t.filter((x) => !x.ma_dd).map((x) => x.tp))) }];
     }
   });
@@ -166,6 +169,7 @@
   });
   kpi('quy-k-nop', (r) => tien(r.nop));
   kpi('quy-k-sodu', (r) => tien(r.so_du));
+  dash.draw('quy-tam-tinh', (el) => { const r = one('quy_kpi'); el.hidden = !(r && r.tam_tinh); });
   kpi('quy-k-thuong', (r) => '+' + tien(r.thuong), () => 'ok');
   kpi('quy-k-phat', (r) => '−' + tien(r.phat), (r) => (r.phat ? 'bad' : 'ok'));
   kpi('quy-k-luong', (r) => r.luong_gd ? '−' + tien(r.luong_gd) : '0đ', (r) => (r.luong_gd ? 'bad' : 'ok'));

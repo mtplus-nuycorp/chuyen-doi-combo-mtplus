@@ -274,20 +274,21 @@
     <p class="mt-step">1 · Tổng quan quỹ</p>
     <h2 class="mt-h">Quỹ cọc MT30 &amp; CLB 100 tỷ</h2>
     <div class="mt-tiles">
-      <div class="mt-card"><p class="mt-k">Tổng cọc đã nộp</p><div class="mt-v" data-draw="quy-k-nop">—</div><div class="mt-sub">Từ tab "Đối soát cọc"</div></div>
-      <div class="mt-card"><p class="mt-k">Tổng số dư quỹ</p><div class="mt-v" data-draw="quy-k-sodu">—</div><div class="mt-sub">Cọc + thưởng − phạt</div></div>
-      <div class="mt-card"><p class="mt-k">Thưởng tuần này</p><div class="mt-v" data-draw="quy-k-thuong">—</div></div>
-      <div class="mt-card"><p class="mt-k">Phạt tuần này</p><div class="mt-v" data-draw="quy-k-phat">—</div></div>
-      <div class="mt-card"><p class="mt-k">Phạt coaching (lương GĐ)</p><div class="mt-v" data-draw="quy-k-luong">—</div><div class="mt-sub">Tách riêng, không trừ cọc</div></div>
-      <div class="mt-card"><p class="mt-k">Cần nộp / nộp bù</p><div class="mt-v" data-draw="quy-k-bu">—</div><div class="mt-sub">Số dư dưới 50% hoặc chưa nộp</div></div>
+      <div class="mt-card"><p class="mt-k">Tổng cọc đã nộp</p><div class="mt-v mt-nho" data-draw="quy-k-nop">—</div><div class="mt-sub">Từ tab "Đối soát cọc"</div></div>
+      <div class="mt-card"><p class="mt-k">Tổng số dư quỹ</p><div class="mt-v mt-nho" data-draw="quy-k-sodu">—</div><div class="mt-sub">Cọc + thưởng − phạt</div></div>
+      <div class="mt-card"><p class="mt-k">Thưởng tuần chọn</p><div class="mt-v mt-nho" data-draw="quy-k-thuong">—</div></div>
+      <div class="mt-card"><p class="mt-k">Phạt tuần chọn</p><div class="mt-v mt-nho" data-draw="quy-k-phat">—</div></div>
+      <div class="mt-card"><p class="mt-k">Phạt coaching (lương GĐ)</p><div class="mt-v mt-nho" data-draw="quy-k-luong">—</div><div class="mt-sub">Tách riêng, không trừ cọc</div></div>
+      <div class="mt-card"><p class="mt-k">Cần nộp / nộp bù</p><div class="mt-v mt-nho" data-draw="quy-k-bu">—</div><div class="mt-sub">Số dư dưới 50% hoặc chưa nộp</div></div>
     </div>
+    <p class="mt-note" data-draw="quy-tam-tinh" hidden><b>Tuần đang chọn chưa kết thúc</b>: thưởng/phạt tuần này chỉ là <b>tạm tính</b> theo số ô đã tick tới giờ, chưa trừ vào số dư. Sau Chủ nhật mới chốt.</p>
     <p class="mt-loi" data-draw="quy-chua-khop" hidden></p>
 
     <p class="mt-step">2 · Số dư từng TP</p>
     <h2 class="mt-h">Số dư cọc theo mã định danh</h2>
-    <p class="mt-note">Số dư = cọc đã nộp + tổng thưởng − tổng phạt, cộng dồn từ tuần bắt đầu. Dưới 50% cọc: nhắc nộp bù vào thứ 3.</p>
+    <p class="mt-note">Số dư = cọc đã nộp + tổng thưởng − tổng phạt, cộng dồn các tuần <b>đã kết thúc</b> kể từ tuần bắt đầu. Dưới 50% cọc: nhắc nộp bù vào thứ 3.</p>
     <div class="mt-scroll"><table class="mt-table">
-      <thead><tr><th>Mã định danh</th><th>Chương trình</th><th>GĐ</th><th class="n">Cọc phải nộp</th><th class="n">Đã nộp</th><th class="n">Tổng thưởng</th><th class="n">Tổng phạt</th><th class="n">Số dư</th><th class="n">Tuần này</th><th>Tình trạng</th></tr></thead>
+      <thead><tr><th>Mã định danh</th><th>Chương trình</th><th>GĐ</th><th class="n">Cọc phải nộp</th><th class="n">Đã nộp</th><th class="n">Tổng thưởng</th><th class="n">Tổng phạt</th><th class="n">Số dư</th><th class="n">Tuần chọn</th><th>Tình trạng</th></tr></thead>
       <tbody data-draw="quy-sodu-rows"></tbody>
     </table></div>
 
